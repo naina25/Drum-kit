@@ -1,10 +1,14 @@
 document.querySelectorAll('.drum').forEach(drum => drum.addEventListener('click', function () {
     let keyinnerHTML = this.innerHTML;
     switchEvents(keyinnerHTML);
+    buttonAnimation(keyinnerHTML);
+    setTimeout(buttonAnimationRemove,1500,keyinnerHTML);
 }));
 
 document.addEventListener('keydown', function(event){
     switchEvents(event.key);
+    buttonAnimation(event.key);
+    setTimeout(buttonAnimationRemove,1500,event.key);
 })
 
 function switchEvents(eventName){
@@ -40,4 +44,13 @@ function switchEvents(eventName){
         default:
             break;
     }
+}
+
+function buttonAnimation(currentKey){
+    let activeButton = document.querySelector(`.${currentKey}`);
+    activeButton.classList.add('pressed');
+}
+function buttonAnimationRemove(currentKey2){
+    let activeButton = document.querySelector(`.${currentKey2}`);
+    activeButton.classList.remove('pressed');
 }
